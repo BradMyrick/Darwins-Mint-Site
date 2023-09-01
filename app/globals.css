@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* --foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255; */
+}
+/* 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+html {
+    font-family: var(--font-righteous);
+
+    /* remove headless-ui modal added padding */
+    /* padding-right: 0 !important;
+    overflow: auto !important; */
+}
+
+h1,
+h2 {
+    font-family: var(--font-handjet);
+}
+
+body {
+    font-family: var(--font-righteous);
+    /* scrollbar-gutter: stable; */
+    /* overscroll-behavior: contain; */
+    width: 100%;
+    /* color: rgb(var(--foreground-rgb));
+	background: linear-gradient(
+			to bottom,
+			transparent,
+			rgb(var(--background-end-rgb))
+		)
+		rgb(var(--background-start-rgb)); */
+}
+
+/* section {
+    scrollbar-gutter: stable;
+} */
+
+/* main {
+    scrollbar-gutter: stable;
+} */
+
+@layer components {
+    .triangle {
+        @apply h-0 w-0 border-[0.8rem] border-solid border-[transparent];
+    }
+}
