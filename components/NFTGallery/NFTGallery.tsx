@@ -46,7 +46,7 @@ function NFTGallery({ setIsOpen }: IProps) {
         >
             <section className="flex flex-col bg-linen p-5 md:w-1/2">
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold">Your NFT Collection</h3>
+                    <h3 className="text-lg font-bold">Your Darwins</h3>
                     <Button
                         type="button"
                         size="sm"
@@ -67,6 +67,7 @@ function NFTGallery({ setIsOpen }: IProps) {
 
                     {isLoading || isFetching ? (
                         <span>
+                            <br />
                             Hodl on while we find your NFTs...
                         </span>
                     ) : data?.data?.ownedNfts?.length ? (

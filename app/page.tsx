@@ -1,8 +1,8 @@
 'use client'
 
-import { WagmiConfig, createConfig, configureChains, mainnet } from 'wagmi'
+import { WagmiConfig, createConfig, configureChains } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
-import { polygonMumbai } from 'wagmi/chains'
+import { goerli, mainnet } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 
@@ -18,7 +18,7 @@ import Footer from '@/components/common/Footer/Footer'
 import useIsMounted from '@/hooks/useIsMounted'
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-    [polygonMumbai],
+    [mainnet, goerli],
     [
         publicProvider(),
         alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY || '' }),

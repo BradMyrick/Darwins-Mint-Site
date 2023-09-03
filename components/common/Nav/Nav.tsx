@@ -11,7 +11,7 @@ import NFTGalleryModal from '@/components/NFTGallery/Modal'
 import ButtonAccount from '@/components/shared/ButtonAccount/ButtonAccount'
 import ButtonConnect from '@/components/shared/ButtonConnect/ButtonConnect'
 
-const includeStyles = 'bg-[url("/paws-pattern-alternative.png")]'
+const includeStyles = 'bg-[url("/cave-pattern-alternative.png")]'
 
 const Nav = () => {
     const navRef = useRef<HTMLElement>(null)

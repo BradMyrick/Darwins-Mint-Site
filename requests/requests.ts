@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const getNFTs = async (address: string | undefined) => {
     const res = await axios.get(
-        `https://${'ethereum'}.g.alchemy.com/v2/${
+        `https://eth-mainnet.g.alchemy.com/v2/${
             process.env.NEXT_PUBLIC_ALCHEMY
         }/getNFTs`,
         {
@@ -17,8 +17,9 @@ export const getNFTs = async (address: string | undefined) => {
 
 export const getNFTMetadata = async (tokenId?: number | undefined) => {
     if (tokenId) {
+
         const res = await axios.get(
-            `https://${'ethereum'}.g.alchemy.com/v2/${
+            `https://eth-mainnet.g.alchemy.com/v2/${
                 process.env.NEXT_PUBLIC_ALCHEMY
             }/getNFTMetadata`,
             {

@@ -59,7 +59,7 @@ const NftCard = ({ data }: IProps) => {
                 <div className={cardClass}>
                     {/* card front */}
                     <div className="absolute inset-0 flex flex-col overflow-hidden rounded-md bg-linen shadow-md [backface-visibility:hidden]">
-                        <div className="flex items-center justify-between bg-wenge bg-[url('/paws-pattern-brown.png')] bg-[size:180px] bg-right-top bg-repeat px-2 py-1.5">
+                        <div className="flex items-center justify-between bg-wenge bg-[url('/cave-pattern-brown.png')] bg-[size:180px] bg-right-top bg-repeat px-2 py-1.5">
                             <Image
                                 width="60"
                                 height="40"
@@ -68,7 +68,7 @@ const NftCard = ({ data }: IProps) => {
                             />
                             {currentData?.id ? (
                                 <a
-                                    href={`https://mumbai.polygonscan.com/token/${process.env.NEXT_PUBLIC_CONTRACT}?a=${currentData?.id}`}
+                                    href={`https://etherscan.com/token/${process.env.NEXT_PUBLIC_CONTRACT}?a=${currentData?.id}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex h-8 min-w-[2rem] items-center justify-center rounded-full bg-antiFlashWhite px-1 text-xsP font-semibold"
@@ -130,7 +130,7 @@ const NftCard = ({ data }: IProps) => {
                         </div>
                     </div>
                     {/* card back */}
-                    <div className="absolute inset-0 rounded-md bg-wenge bg-[url('/paws-pattern-brown.png')] bg-[size:250px] bg-repeat [backface-visibility:hidden] [transform:rotateY(180deg)]" />
+                    <div className="absolute inset-0 rounded-md bg-wenge bg-[url('/cave-pattern-brown.png')] bg-[size:250px] bg-repeat [backface-visibility:hidden] [transform:rotateY(180deg)]" />
                 </div>
             </div>
         </>
