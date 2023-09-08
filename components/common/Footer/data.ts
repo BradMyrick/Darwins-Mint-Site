@@ -7,7 +7,7 @@ export const contractInfoLabelsData = [
     {
         name: 'address',
         value: shortenHexString(process.env.NEXT_PUBLIC_CONTRACT),
-        href: `https://etherscan.io/address/${process.env.NEXT_PUBLIC_CONTRACT}`,
+        href: `https://goerli.etherscan.io/address/${process.env.NEXT_PUBLIC_CONTRACT}`,
     },
     {
         name: 'standard',

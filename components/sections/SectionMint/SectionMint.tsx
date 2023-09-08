@@ -60,11 +60,9 @@ const SectionMint = () => {
     } = useContractContext()
     const {
         userBalance,
-        userPhaseNftBalance,
-        isUserPhaseNftBalanceFetching,
         isUserBalanceFetching,
+        userDarwinPublicMints,
         refetchUserTotalNftBalance,
-        refetchUserPhaseNftBalance,
         refetchUserBalance,
     } = useUserContext()
 
@@ -82,7 +80,7 @@ const SectionMint = () => {
 
     const lowUserBalance =
         typeof userBalance?.formatted === 'string' &&
-        +userBalance.formatted < 0.001
+        +userBalance.formatted < 0.0069
 
     const totalPrice = quantity ? pricePerNFT * +quantity : undefined
     const isEnoughBalanceToMint =
@@ -90,10 +88,11 @@ const SectionMint = () => {
             ? +userBalance.formatted >= totalPrice
             : true
 
-    const mintableQuantity =
-        limitPerWallet && typeof userPhaseNftBalance === 'number'
-            ? limitPerWallet - userPhaseNftBalance
-            : undefined
+    const mintableQuantity = 
+        limitPerWallet && userDarwinPublicMints
+            ? limitPerWallet - userDarwinPublicMints
+            : undefined 
+
 
     const {
         config,
@@ -106,22 +105,9 @@ const SectionMint = () => {
     } = usePrepareContractWrite({
         ...contractConfig,
         enabled: false,
-        functionName: 'claim',
+        functionName: 'publicMint',
         args: [
-            address!,
             parseUnits(quantity, 0),
-            '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-            parseEther(pricePerNFT.toString()),
-            {
-                proof: [],
-                quantityLimitPerWallet: parseUnits(
-                    process.env.NEXT_PUBLIC_LIMIT_PER_WALLET!,
-                    0
-                ),
-                pricePerToken: parseEther(pricePerNFT.toString()),
-                currency: '0x0000000000000000000000000000000000000000',
-            },
-            '0x',
         ],
         value: parseEther((pricePerNFT * +quantity).toString()),
     })
@@ -216,7 +202,6 @@ const SectionMint = () => {
             setMintedNFTId(undefined)
             refetchTotalMinted()
             refetchUserTotalNftBalance()
-            refetchUserPhaseNftBalance()
             refetchUserBalance()
             setInputValue('1')
             setMintedMetadata({
@@ -258,7 +243,6 @@ const SectionMint = () => {
         address,
         refetchTotalMinted,
         refetchUserTotalNftBalance,
-        refetchUserPhaseNftBalance,
         refetchUserBalance,
     ])
 
@@ -296,8 +280,6 @@ const SectionMint = () => {
                 {isConnected && !lowUserBalance && !isWrongNetwork ? (
                     <InfoMessageWrapper
                         isLoading={
-                            userPhaseNftBalance === undefined ||
-                            isUserPhaseNftBalanceFetching ||
                             isPrepareFetching ||
                             isReceiptLoading
                         }
@@ -310,30 +292,21 @@ const SectionMint = () => {
                         }
                         isActionRequired={isTransactionLoading}
                         isSuccess={
-                            !!mintedMetadata && !isUserPhaseNftBalanceFetching
+                            !!mintedMetadata
                         }
                     >
                         <InfoMessage
-                            isUserPhaseNftBalanceFetching={
-                                userPhaseNftBalance === undefined ||
-                                isUserPhaseNftBalanceFetching
-                            }
                             isPrepareFetching={isPrepareFetching}
                             prepareError={prepareError}
                             claimedMetadataError={claimedMetadataError}
                             isWriteLoading={isTransactionLoading}
                             isReceiptLoading={isReceiptLoading}
-                            isClaimedMetadataFetching={
-                                isClaimedMetadataFetching
-                            }
+                            isClaimedMetadataFetching={isClaimedMetadataFetching}
                             transactionError={transactionError}
                             mintableQuantity={mintableQuantity}
                             mintedMetadata={mintedMetadata}
-                            mintedQuantity={
-                                claimedNFTModalData?.metadata?.quantity
-                            }
-                            isEnoughBalanceToMint={isEnoughBalanceToMint}
-                        />
+                            mintedQuantity={claimedNFTModalData?.metadata?.quantity}
+                            isEnoughBalanceToMint={isEnoughBalanceToMint}/>
                     </InfoMessageWrapper>
                 ) : null}
                 <div
@@ -349,8 +322,6 @@ const SectionMint = () => {
                                 !isConnected ||
                                 lowUserBalance ||
                                 isWrongNetwork ||
-                                userPhaseNftBalance === undefined ||
-                                isUserPhaseNftBalanceFetching ||
                                 isPrepareFetching ||
                                 isTransactionLoading ||
                                 isReceiptLoading
@@ -359,23 +330,14 @@ const SectionMint = () => {
                         <p className="mb-9 text-sm">
                             {isConnected ? (
                                 <>
-                                    {userPhaseNftBalance === undefined ||
-                                        isUserPhaseNftBalanceFetching ? (
-                                        <>-</>
-                                    ) : (
-                                        <StatusMessage
-                                            userPhaseNftBalance={
-                                                userPhaseNftBalance
-                                            }
-                                            limitPerWallet={limitPerWallet}
-                                            totalPrice={totalPrice}
-                                            isEnoughBalanceToMint={
-                                                isEnoughBalanceToMint
-                                            }
-                                        />
-                                    )}
+                                    <span className="font-bold">
+                                        {mintableQuantity}
+                                    </span>{' '}
+                                    NFTs available to mint
                                 </>
-                            ) : null}
+                            ) : (
+                                'Connect your wallet to mint'
+                            )}
                         </p>
                         <Button
                             className="min-w-[8rem]"
@@ -419,15 +381,8 @@ const SectionMint = () => {
                                 className="relative z-[1] h-full w-full"
                                 width="100"
                                 height="50"
-                                src={
-                                    mintedMetadata?.image
-                                        ? ipfsToHttps(mintedMetadata?.image)
-                                        : undefined || '/NFT-placeholder.png'
-                                }
+                                src={ '/DARWINS.png' }
                                 alt={
-                                    mintedMetadata?.name
-                                        ? `${mintedMetadata?.name} NFT caveman`
-                                        : undefined ||
                                         'placeholder NFT caveman'
                                 }
                             />
@@ -451,13 +406,7 @@ const SectionMint = () => {
                         </span>
                     </p>
                     <figure className="sx:mr-[unset] mx-auto mt-4 h-auto w-6 min-w-[120px] shrink-0 grow xs:ml-4 xs:h-full md:mt-0">
-                        <Image
-                            className="relative xs:top-[-1.5rem]"
-                            alt="darwin sticker"
-                            width="120"
-                            height="133"
-                            src="/darwin-sticker.png"
-                        />
+
                     </figure>
                 </div>
             </AngledContentStripe>

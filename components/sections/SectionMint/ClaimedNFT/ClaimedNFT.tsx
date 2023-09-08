@@ -41,7 +41,7 @@ const ClaimedNFT = ({
             <span className="mx-2 block border-b border-dashed border-wenge/40 pt-1" />
             <div className="flex flex-col items-center px-4 pb-7 pt-5">
                 <span className="mb-6 max-w-[100%] text-xsP">
-                    Congratulations! Behold your freshly minted NFT.
+                    Congratulations! You have claimed your NFT.
                 </span>
                 <NftCard data={data} />
             </div>
@@ -50,13 +50,12 @@ const ClaimedNFT = ({
                     {quantity && +quantity > 1 ? (
                         <>
                             <span className="font-bold">
-                                1 of {quantity} freshly minted NFTs shown.
+                                1 of {quantity} newly minted NFTs
                             </span>
                             <br />
                         </>
                     ) : null}
-                    To view all the NFTs you&apos;ve collected so far, visit
-                    your personalized NFT gallery.
+                    To view all the NFTs you&apos;ve collected so far, click on your wallet address in the top right corner of the page.
                 </span>
                 <Button
                     type="button"

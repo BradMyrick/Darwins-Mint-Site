@@ -10,7 +10,7 @@ interface IProps {
     totalMinted: number | undefined
     isTotalMintedFetching: boolean
     refetchTotalMinted: () => void
-    activePhaseId: number | undefined
+    userDarwinPublicMints: number | undefined
     isActivePhaseIdFetching: boolean
     refetchActivePhaseId: () => void
     limitPerWallet: number | undefined
@@ -20,7 +20,7 @@ const ContractContext = createContext<IProps>({
     totalMinted: undefined,
     isTotalMintedFetching: true,
     refetchTotalMinted: () => null,
-    activePhaseId: undefined,
+    userDarwinPublicMints: undefined,
     isActivePhaseIdFetching: true,
     refetchActivePhaseId: () => null,
     limitPerWallet: undefined,
@@ -35,18 +35,18 @@ export function ContractProvider({ children }: { children: ReactNode }) {
     } = useContractRead({
         ...contractConfig,
         enabled: true,
-        functionName: 'totalMinted',
+        functionName: 'totalSupply',
     })
 
     const {
-        data: activePhaseIdBigInt,
+        data: acttivePhaseBool,
         isFetching: isActivePhaseIdFetching,
         refetch: refetchActivePhaseId,
         isFetchedAfterMount: isActivePhaseIdChecked,
     } = useContractRead({
         ...contractConfig,
         enabled: true,
-        functionName: 'getActiveClaimConditionId',
+        functionName: 'pubMintLive',
     })
 
     const totalMinted =
@@ -55,9 +55,8 @@ export function ContractProvider({ children }: { children: ReactNode }) {
             : undefined
 
     const activePhaseId =
-        typeof activePhaseIdBigInt === 'bigint'
-            ? +formatUnits(activePhaseIdBigInt, 0)
-            : undefined
+        typeof acttivePhaseBool === 'boolean' ? acttivePhaseBool : false
+
 
     return (
         <ContractContext.Provider
@@ -65,9 +64,7 @@ export function ContractProvider({ children }: { children: ReactNode }) {
                 totalMinted: isTotalMintedChecked ? totalMinted : undefined,
                 isTotalMintedFetching,
                 refetchTotalMinted,
-                activePhaseId: isActivePhaseIdChecked
-                    ? activePhaseId
-                    : undefined,
+                userDarwinPublicMints: isTotalMintedChecked ? totalMinted : undefined,
                 isActivePhaseIdFetching,
                 refetchActivePhaseId,
                 limitPerWallet: Number(

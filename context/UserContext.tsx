@@ -12,9 +12,9 @@ interface IProps {
     userTotalNftBalance: undefined | number
     isUserTotalNftBalanceFetching: boolean
     refetchUserTotalNftBalance: () => void
-    userPhaseNftBalance: undefined | number
-    isUserPhaseNftBalanceFetching: boolean
-    refetchUserPhaseNftBalance: () => void
+    userDarwinPublicMints: undefined | number
+    isUserDarwinPublicMintsFetching: boolean
+    refetchUserDarwinPublicMints: () => void
     userBalance:
         | undefined
         | {
@@ -31,9 +31,9 @@ const UserContext = createContext<IProps>({
     userTotalNftBalance: undefined,
     isUserTotalNftBalanceFetching: true,
     refetchUserTotalNftBalance: () => null,
-    userPhaseNftBalance: undefined,
-    isUserPhaseNftBalanceFetching: true,
-    refetchUserPhaseNftBalance: () => null,
+    userDarwinPublicMints: undefined,
+    isUserDarwinPublicMintsFetching: true,
+    refetchUserDarwinPublicMints: () => null,
     userBalance: undefined,
     isUserBalanceFetching: true,
     refetchUserBalance: () => null,
@@ -41,7 +41,6 @@ const UserContext = createContext<IProps>({
 
 export function UserProvider({ children }: { children: ReactNode }) {
     const { address } = useAccount()
-    const { activePhaseId } = useContractContext()
 
     const {
         data: userTotalNftBalanceBigInt,
@@ -56,16 +55,16 @@ export function UserProvider({ children }: { children: ReactNode }) {
     })
 
     const {
-        data: userPhaseNftBalanceBigInt,
-        isFetching: isUserPhaseNftBalanceFetching,
-        refetch: refetchUserPhaseNftBalance,
-        isFetchedAfterMount: isUserPhaseNftBalanceChecked,
+        data: userDarwinPublicMints,
+        isFetching: isUserDarwinPublicMintsFetching,
+        refetch: refetchUserDarwinPublicMints,
+        isFetchedAfterMount: isUserDarwinPublicMintsChecked,
     } = useContractRead({
         ...contractConfig,
-        enabled: !!address && activePhaseId !== undefined,
-        functionName: 'getSupplyClaimedByWallet',
+        enabled: !!address,
+        functionName: 'getPublicMintedAmount',
         //@ts-ignore
-        args: [activePhaseId ? BigInt(activePhaseId) : undefined, address!],
+        args: [address!],
     })
 
     const {
@@ -85,8 +84,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
             : undefined
 
     const userPhaseNftBalance =
-        typeof userPhaseNftBalanceBigInt === 'bigint'
-            ? +formatUnits(userPhaseNftBalanceBigInt, 0)
+        typeof userDarwinPublicMints === 'bigint'
+            ? +formatUnits(userDarwinPublicMints, 0)
             : undefined
 
     return (
@@ -97,11 +96,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
                     : undefined,
                 isUserTotalNftBalanceFetching,
                 refetchUserTotalNftBalance,
-                userPhaseNftBalance: isUserPhaseNftBalanceChecked
+                userDarwinPublicMints: isUserDarwinPublicMintsChecked
                     ? userPhaseNftBalance
                     : undefined,
-                isUserPhaseNftBalanceFetching,
-                refetchUserPhaseNftBalance,
+                isUserDarwinPublicMintsFetching,
+                refetchUserDarwinPublicMints,
                 userBalance: isUserBalanceChecked ? userBalance : undefined,
                 isUserBalanceFetching,
                 refetchUserBalance,

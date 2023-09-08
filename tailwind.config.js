@@ -16,6 +16,7 @@ module.exports = {
             cadmiumOrange: '#ED872D',
             dodgerBlue: '#1E90FF',
             mayaBlue: '#73C2FB',
+            lightBlue: '#B3DFFB',
             wenge: '#534444',
             linen: '#FBF3E8',
             antiFlashWhite: '#EBEBEB',

@@ -7,7 +7,6 @@ import LoaderDots from '@/components/common/LoaderDots/LoaderDots'
 import { IMintedMetadata, INFTDataWithId } from '@/types/getNftsAPI'
 
 interface IProps {
-    isUserPhaseNftBalanceFetching: boolean
     isPrepareFetching: boolean
     prepareError: Error | null
     isWriteLoading: boolean
@@ -22,7 +21,6 @@ interface IProps {
 }
 
 const InfoMessage = ({
-    isUserPhaseNftBalanceFetching,
     isPrepareFetching,
     prepareError,
     isWriteLoading,
@@ -44,14 +42,6 @@ const InfoMessage = ({
         mintableQuantity === 0
             ? 'Maximum NFTs per wallet minted.'
             : 'You can continue minting.'
-
-    if (isUserPhaseNftBalanceFetching)
-        return (
-            <>
-                {mintedMetadata ? 'Succesfully claimed. ' : ''}Preparing, please
-                wait <LoaderDots />
-            </>
-        )
 
     if (isPrepareFetching)
         return (

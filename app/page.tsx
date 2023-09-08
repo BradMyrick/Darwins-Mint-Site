@@ -1,6 +1,7 @@
 'use client'
 
 import { WagmiConfig, createConfig, configureChains } from 'wagmi'
+import React, { useState, useEffect } from 'react';
 import { publicProvider } from 'wagmi/providers/public'
 import { goerli, mainnet } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
@@ -39,7 +40,11 @@ const config = createConfig({
 const queryClient = new QueryClient()
 
 export default function Home() {
-    const isMounted = useIsMounted()
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     return (
         <WagmiConfig config={config}>
@@ -49,7 +54,7 @@ export default function Home() {
                         <main className="max-w-full overflow-x-hidden">
                             <Nav />
                             <SectionHero />
-                            {isMounted ? <SectionMint /> : null}
+                            {isClient ? <SectionMint /> : null}
                             <SectionRoadmap />
                         </main>
                         <Footer />
@@ -57,5 +62,5 @@ export default function Home() {
                 </ContractProvider>
             </QueryClientProvider>
         </WagmiConfig>
-    )
+    );
 }

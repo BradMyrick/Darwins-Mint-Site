@@ -8,17 +8,10 @@ import Title from '@/components/common/Title/Title'
 const SectionHero = () => {
     return (
         <div className="z-1 relative m-auto">
-            <div className="flex h-[calc(100vh-13rem)] min-h-[30rem] justify-center bg-mayaBlue bg-[url('/cave-pattern.png')] bg-[size:35%] bg-repeat"></div>
+            <div className="flex h-[calc(100vh-13rem)] min-h-[30rem] justify-center bg-mayaBlue bg-[url('/darwin-pattern.png')] bg-[size:45%] bg-repeat"></div>
             <AngledContentStripe color="yellow">
                 <div className="mx-auto flex max-w-[820px] flex-col px-5 py-4 xs:flex-row">
-                    <figure className="mx-auto h-[11rem] w-6 min-w-[130px] shrink-0 grow xs:ml-[unset] xs:mr-4 xs:h-full">
-                        <Image
-                            className="absolute -top-[5.5rem] h-[260px] w-full max-w-[130px]"
-                            alt="caveman illustration"
-                            width="130"
-                            height="260"
-                            src="/hero-caveman.png"
-                        />
+                    <figure className="mx-auto h-[14rem] w-6 min-w-[130px] shrink-0 grow xs:ml-[unset] xs:mr-4 xs:h-full">
                     </figure>
                     <Title title="Info">
                     <p className="text-md max-w-auto basis shrink grow">
@@ -41,7 +34,6 @@ const SectionHero = () => {
                                     />
                                 </sup>
                             </a>
-                            .
                         </span>
                     </p>
                     </Title>

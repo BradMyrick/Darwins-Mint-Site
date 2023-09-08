@@ -24,10 +24,19 @@ html {
     overflow: auto !important; */
 }
 
-h1,
+h1 {
+    font-weight: bold;
+    font-size: xx-large;
+    font-family: var(--font-righteous);
+  }
+
 h2 {
     font-family: var(--font-handjet);
 }
+
+.drop-shadow-title {
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+  }
 
 body {
     font-family: var(--font-righteous);

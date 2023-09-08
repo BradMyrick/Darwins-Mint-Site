@@ -33,36 +33,15 @@ const Faucet = () => {
                 </span>
                 <br />
                 Your current balance is {userBalance?.formatted}{' '}
-                {nativeCurrency}. Having enough balance ensures you can claim
-                NFTs and cover the transaction fees.
+                {nativeCurrency}. You must have at least 0.0069 {nativeCurrency}{' '}, plus a small amount for gas fees, to mint a Darwin.
             </span>
             <span className="mb-5 block border-b border-dashed border-wenge/40"></span>
             <span className="mb-4 block">
-                1. Go get some {nativeCurrency} for free:
+                1. Purchase {nativeCurrency} from an exchange
             </span>
-            <div className="mb-8 xs:text-center">
-                {faucets?.map((href: string, idx: number) => (
-                    <a
-                        key={href}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mr-8 block font-bold hover:!underline xs:inline-block"
-                    >
-                        <span>
-                            <span>faucet {idx + 1}</span>
-                            <Image
-                                className="ml-[0.3rem] inline-block w-[0.8rem] pb-[0.3rem] text-dodgerBlue"
-                                src={arrowExternalIcon}
-                                alt="icon of arrow in box"
-                            />
-                        </span>
-                    </a>
-                    // </Button>
-                ))}
-            </div>
+
             <div>
-                2. After you&apos;ve claimed some,{' '}
+                2. After you&apos;ve purchased,{' '}
                 <Button
                     className="mr-2"
                     size="sm"

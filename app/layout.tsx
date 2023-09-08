@@ -1,3 +1,4 @@
+`use client`
 import './globals.css'
 import type { Metadata } from 'next'
 import { Righteous, Handjet } from 'next/font/google'
