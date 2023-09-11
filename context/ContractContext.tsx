@@ -11,8 +11,9 @@ interface IProps {
     isTotalMintedFetching: boolean
     refetchTotalMinted: () => void
     userDarwinPublicMints: number | undefined
-    isActivePhaseIdFetching: boolean
-    refetchActivePhaseId: () => void
+    isPublicMintLive: boolean
+    isPublicMintLiveFetching: boolean
+    refetchPublicMintStatus: () => void
     limitPerWallet: number | undefined
 }
 
@@ -21,8 +22,9 @@ const ContractContext = createContext<IProps>({
     isTotalMintedFetching: true,
     refetchTotalMinted: () => null,
     userDarwinPublicMints: undefined,
-    isActivePhaseIdFetching: true,
-    refetchActivePhaseId: () => null,
+    isPublicMintLive: true,
+    isPublicMintLiveFetching: true,
+    refetchPublicMintStatus: () => null,
     limitPerWallet: undefined,
 })
 
@@ -39,10 +41,10 @@ export function ContractProvider({ children }: { children: ReactNode }) {
     })
 
     const {
-        data: acttivePhaseBool,
-        isFetching: isActivePhaseIdFetching,
-        refetch: refetchActivePhaseId,
-        isFetchedAfterMount: isActivePhaseIdChecked,
+        data: activePublicMintBool,
+        isFetching: isPublicMintLiveFetching,
+        refetch: refetchPublicMintStatus,
+        isFetchedAfterMount: isPublicMintChecked,
     } = useContractRead({
         ...contractConfig,
         enabled: true,
@@ -54,10 +56,7 @@ export function ContractProvider({ children }: { children: ReactNode }) {
             ? +formatUnits(totalMintedBigInt, 0)
             : undefined
 
-    const activePhaseId =
-        typeof acttivePhaseBool === 'boolean' ? acttivePhaseBool : false
-
-
+    const ispublicLive = typeof activePublicMintBool === 'boolean' ? activePublicMintBool : false
     return (
         <ContractContext.Provider
             value={{
@@ -65,11 +64,10 @@ export function ContractProvider({ children }: { children: ReactNode }) {
                 isTotalMintedFetching,
                 refetchTotalMinted,
                 userDarwinPublicMints: isTotalMintedChecked ? totalMinted : undefined,
-                isActivePhaseIdFetching,
-                refetchActivePhaseId,
-                limitPerWallet: Number(
-                    process.env.NEXT_PUBLIC_LIMIT_PER_WALLET
-                ),
+                isPublicMintLive: isPublicMintChecked ? ispublicLive : true,
+                isPublicMintLiveFetching,
+                refetchPublicMintStatus,
+                limitPerWallet: 500,
             }}
         >
             {children}

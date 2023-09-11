@@ -9,17 +9,15 @@ import Button from '@/components/common/Button'
 interface IProps {
     value: string
     setValue: Dispatch<SetStateAction<string>>
-    mintableQuantity: number | undefined
     isDisabled: boolean
 }
 
 const InputNft = ({
     value,
     setValue,
-    mintableQuantity,
     isDisabled,
 }: IProps) => {
-    const { limitPerWallet } = useContractContext()
+    const { isPublicMintLive } = useContractContext()
 
     return (
         <div className="mx-auto mb-4 flex max-w-[16rem] border-2 border-x-wenge bg-white p-2">
@@ -27,9 +25,9 @@ const InputNft = ({
                 variation="secondary"
                 type="button"
                 onClick={() =>
-                    setValue((curr: string) => (+curr - 1).toString())
+                    setValue((curr: string) => Math.max(1, +curr - 1).toString())
                 }
-                disabled={!mintableQuantity || +value <= 1 || isDisabled}
+                disabled={!isPublicMintLive}
                 data-cy="btn-minus"
             >
                 -
@@ -38,14 +36,14 @@ const InputNft = ({
                 className="w-[80%] text-center placeholder:text-sm disabled:text-silver"
                 type="text"
                 inputMode="numeric"
-                pattern={`[1-${mintableQuantity}]`}
+                pattern='[0-9]{1,3}'
                 value={value}
                 onChange={(e) => {
                     if (!e.target.validity.patternMismatch) {
                         setValue(e.target.value)
                     }
                 }}
-                disabled={!mintableQuantity || isDisabled}
+                disabled={!isPublicMintLive}
                 placeholder="quantity"
                 data-cy="input-quantity"
             />
@@ -53,13 +51,9 @@ const InputNft = ({
                 variation="secondary"
                 type="button"
                 onClick={() =>
-                    setValue((curr: string) => (+curr + 1).toString())
+                    setValue((curr: string) => Math.min(500, +curr + 1).toString())
                 }
-                disabled={
-                    !mintableQuantity ||
-                    +value === mintableQuantity ||
-                    isDisabled
-                }
+                disabled={!isPublicMintLive}
                 data-cy="btn-plus"
             >
                 +
@@ -69,3 +63,4 @@ const InputNft = ({
 }
 
 export default InputNft
+

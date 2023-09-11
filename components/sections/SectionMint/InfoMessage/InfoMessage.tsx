@@ -14,7 +14,6 @@ interface IProps {
     isClaimedMetadataFetching: boolean
     transactionError: Error | null
     claimedMetadataError: unknown
-    mintableQuantity: number | undefined
     mintedMetadata: IMintedMetadata | null | undefined
     mintedQuantity: string | undefined
     isEnoughBalanceToMint: boolean
@@ -28,7 +27,7 @@ const InfoMessage = ({
     isClaimedMetadataFetching,
     transactionError,
     claimedMetadataError,
-    mintableQuantity,
+
     mintedMetadata,
     mintedQuantity,
     isEnoughBalanceToMint,
@@ -37,11 +36,6 @@ const InfoMessage = ({
         (prepareError as BaseError) || {}
     const { shortMessage: shortTransactionErrorMessage } =
         (transactionError as BaseError) || {}
-
-    const continueMintingMessage =
-        mintableQuantity === 0
-            ? 'Maximum NFTs per wallet minted.'
-            : 'You can continue minting.'
 
     if (isPrepareFetching)
         return (
@@ -64,7 +58,6 @@ const InfoMessage = ({
             <>
                 No need to worry. While you&apos;ve successfully claimed the
                 NFT, there seems to be an error in fetching the metadata.{' '}
-                {continueMintingMessage}
             </>
         )
     }
@@ -108,14 +101,11 @@ const InfoMessage = ({
         return (
             <>
                 NFT{mintedQuantity && +mintedQuantity > 1 ? "'s" : ''}{' '}
-                successfully claimed. {continueMintingMessage}
+                successfully claimed.
             </>
         )
 
-    if (mintableQuantity === 0)
-        return <>You&apos;ve reached your limit for minting NFTs.</>
-
-    return <>Ready for minting</>
+    return <>Ready!</>
 }
 
 export default InfoMessage

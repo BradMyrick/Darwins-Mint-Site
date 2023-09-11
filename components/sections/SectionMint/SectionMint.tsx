@@ -6,7 +6,7 @@ import {
     usePrepareContractWrite,
     useWaitForTransaction,
 } from 'wagmi'
-import { fromHex, parseEther, parseUnits } from 'viem'
+import { etherUnits, fromHex, parseEther, parseUnits } from 'viem'
 import clsx from 'clsx'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 
@@ -53,7 +53,7 @@ const SectionMint = () => {
     const { isWrongNetwork } = useIsWrongNetwork()
 
     const {
-        limitPerWallet,
+        isPublicMintLive,
         totalMinted,
         isTotalMintedFetching,
         refetchTotalMinted,
@@ -88,11 +88,6 @@ const SectionMint = () => {
             ? +userBalance.formatted >= totalPrice
             : true
 
-    const mintableQuantity = 
-        limitPerWallet && userDarwinPublicMints
-            ? limitPerWallet - userDarwinPublicMints
-            : undefined 
-
 
     const {
         config,
@@ -104,14 +99,11 @@ const SectionMint = () => {
         refetch: refetchPrepare,
     } = usePrepareContractWrite({
         ...contractConfig,
-        enabled: false,
         functionName: 'publicMint',
-        args: [
-            parseUnits(quantity, 0),
-        ],
-        value: parseEther((pricePerNFT * +quantity).toString()),
+        args: [parseUnits(quantity, 0)],
+        value: parseEther(totalPrice?.toString() || '0'),
+        enabled: false,
     })
-
     const {
         isLoading: isTransactionLoading,
         write,
@@ -267,6 +259,8 @@ const SectionMint = () => {
                 <Faucet />
             ) : null}
             {isWrongNetwork ? <WrongNetworkNotice /> : null}
+            
+            {/* Minting */}
 
             <div
                 className={clsx(
@@ -303,7 +297,6 @@ const SectionMint = () => {
                             isReceiptLoading={isReceiptLoading}
                             isClaimedMetadataFetching={isClaimedMetadataFetching}
                             transactionError={transactionError}
-                            mintableQuantity={mintableQuantity}
                             mintedMetadata={mintedMetadata}
                             mintedQuantity={claimedNFTModalData?.metadata?.quantity}
                             isEnoughBalanceToMint={isEnoughBalanceToMint}/>
@@ -317,36 +310,39 @@ const SectionMint = () => {
                         <InputNft
                             value={inputValue}
                             setValue={setInputValue}
-                            mintableQuantity={mintableQuantity}
                             isDisabled={
-                                !isConnected ||
-                                lowUserBalance ||
+                                !inputValue ||
                                 isWrongNetwork ||
+                                lowUserBalance ||
+                                isClaimedMetadataFetching ||
+                                isUserBalanceFetching ||
                                 isPrepareFetching ||
                                 isTransactionLoading ||
-                                isReceiptLoading
+                                !isPublicMintLive ||
+                                isReceiptLoading ||
+                                !isEnoughBalanceToMint
                             }
-                        />
-                        <p className="mb-9 text-sm">
-                            {isConnected ? (
-                                <>
-                                    <span className="font-bold">
-                                        {mintableQuantity}
-                                    </span>{' '}
-                                    NFTs available to mint
-                                </>
-                            ) : (
-                                'Connect your wallet to mint'
-                            )}
-                        </p>
+                            />
+                            <p className="mb-9 text-sm">
+                                {isWrongNetwork
+                                    ? 'Please switch to the correct network to mint NFTs.'
+                                    : lowUserBalance
+                                    ? 'You need to have at least 0.0069 ETH to mint NFTs.'
+                                    : !isEnoughBalanceToMint
+                                    ? 'Not enough balance to mint NFTs.'
+                                    : isPublicMintLive
+                                    ? 'Minting is live. Mint away!'
+                                    : 'Minting is not live yet. Stay tuned!'}
+                            </p>
                         <Button
-                            className="min-w-[8rem]"
                             type="button"
+                            variation="primary"
+                            onClick={mintNFT}
                             disabled={
                                 !inputValue ||
                                 isWrongNetwork ||
-                                !mintableQuantity ||
                                 lowUserBalance ||
+                                !isPublicMintLive ||
                                 isClaimedMetadataFetching ||
                                 isUserBalanceFetching ||
                                 isPrepareFetching ||
@@ -354,9 +350,6 @@ const SectionMint = () => {
                                 isReceiptLoading ||
                                 !isEnoughBalanceToMint
                             }
-                            onClick={() => {
-                                mintNFT()
-                            }}
                             data-cy="btn-mint"
                         >
                             MINT
