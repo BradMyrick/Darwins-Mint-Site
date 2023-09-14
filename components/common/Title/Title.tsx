@@ -7,7 +7,7 @@ interface IProps {
 
 const Title = ({ title, children }: IProps) => {
     return (
-        <div className="mx-auto mb-4 flex max-w-auto flex-col">
+        <div className="mx-auto mb-4 flex max-w-auto flex-col px-2">
             <h2 className="mb-2 text-2xl font-bold">{title}</h2>
             <p className="">{children}</p>
         </div>
