@@ -2,6 +2,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Righteous, Handjet } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react';
 
 declare global {
     interface Window {
@@ -75,6 +76,7 @@ export default function RootLayout({
                 className={`${righteous.variable} ${handjet.variable} bg-antiFlashWhite text-wenge`}
             >
                 {children}
+                <Analytics />
             </body>
         </html>
     )
