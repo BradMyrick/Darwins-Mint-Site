@@ -18,7 +18,7 @@ const AngledContentStripe = ({ children, color = 'yellow' }: IProps) => {
 
     return (
         <div
-            className={`relative m-auto bg-${backgroundClass} flex max-w-[1024px]`}
+            className={`relative m-auto bg-${backgroundClass} flex max-w-auto`}
         >
             <svg
                 preserveAspectRatio="none"

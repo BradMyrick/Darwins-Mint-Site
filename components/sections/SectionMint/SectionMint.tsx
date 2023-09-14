@@ -245,14 +245,8 @@ const SectionMint = () => {
     }, [address])
 
     return (
-        <section className="pt-[7rem] md:pt-[10rem]">
-            <Title title="Mint">
-                Minting an NFT to embark on your journey through time, adding a unique piece of history to your digital collection.{' '}
-                <span className="">
-                    Total NFTs Minted:{' '}
-                    {isTotalMintedFetching ? <LoaderDots /> : totalMinted}
-                </span>
-            </Title>
+        <section className="pt-[7rem] lg:pt-[10rem] justify-center bg-antiFlashWhite">
+
             {/* Notices */}
             {!isConnected ? <NotConnectedNotice /> : null}
             {isConnected && lowUserBalance && !isWrongNetwork ? (

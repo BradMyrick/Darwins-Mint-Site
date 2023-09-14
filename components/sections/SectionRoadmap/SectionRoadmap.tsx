@@ -12,12 +12,13 @@ import Title from '@/components/common/Title'
 
 const SectionRoadmap = () => {
     return (
-        <section className="bg-antiFlashWhite pb-10 pt-[7rem] md:pt-[10rem]">
-            <Title title="Roadmap">
-                Explore the milestones and strategies guiding you through the captivating universe of non-fungible tokens.
-            </Title>
+        <section className="bg-antiFlashWhite pb-10 pt-[7rem] md:pt-[10rem] justify-center">
+
 
             <div className="mx-auto mb-4 flex max-w-[640px] flex-col">
+            <Title title="Roadmap">
+                Explore the milestones and outline for our gamified ecosystem.
+            </Title>
                 {roadmapPhasesConfig.map((item, idx) => {
                     const isIndexOdd = idx % 2 !== 0
 
