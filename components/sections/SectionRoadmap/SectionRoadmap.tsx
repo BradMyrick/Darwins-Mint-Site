@@ -32,7 +32,7 @@ const SectionRoadmap = () => {
                                 )}
                             >
                                 <Image
-                                    className="h-[10rem] w-auto max-w-[80%] object-contain"
+                                    className="h-auto w-auto max-w-[80%] object-contain"
                                     height={145}
                                     width={145}
                                     alt={item.alt}
