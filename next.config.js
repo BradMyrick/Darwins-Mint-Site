@@ -4,12 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'ipfs.io',
-                port: '',
-            },
-            {
-                protocol: 'https',
-                hostname: 'i.postimg.cc',
+                hostname: 'darwins.app',
                 port: '',
             },
         ],

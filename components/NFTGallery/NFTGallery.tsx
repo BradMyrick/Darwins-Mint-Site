@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 // Utilities
-import { getIdFromHash, ipfsToHttps } from '@/utils';
+import { getIdFromHash } from '@/utils';
 
 // Requests
 import { getNFTs } from '@/requests';
@@ -68,11 +68,11 @@ function NFTGallery({ setIsOpen }: IProps) {
                     {isLoading || isFetching ? (
                         <span>
                             <br />
-                            Hodl on while we find your NFTs...
+                            Hodl on while we load your NFTs...
                         </span>
                     ) : data?.data?.ownedNfts?.length ? (
                         <span>
-                            To dive deeper into the world of The Darwins collection, simply click on any artwork. You&apos;ll uncover additional details about each NFT, allowing you to embark on an exciting journey of exploration and discovery. Happy evolving!
+                            To dive deeper into your NFT, simply click on the artwork. You&apos;ll uncover additional details about each NFT, allowing you to embark on an exciting journey of exploration and discovery. Happy evolving!
                         </span>
 
                     ) : (
@@ -107,14 +107,11 @@ function NFTGallery({ setIsOpen }: IProps) {
                                 >
                                     <Image
                                         className="m-auto max-h-[100%] w-auto"
-                                        width="60"
-                                        height="40"
-                                        src={ipfsToHttps(
-                                            item?.metadata?.image || ''
-                                        )}
+                                        layout="fill"
+                                        src={item?.metadata?.image || ''}
                                         alt={
                                             item?.metadata?.name ||
-                                            'caveman silhouette'
+                                            'caveman prereveal'
                                         }
                                     />
                                 </figure>

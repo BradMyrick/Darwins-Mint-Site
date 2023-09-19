@@ -105,7 +105,13 @@ const InfoMessage = ({
             </>
         )
 
-    return <>Ready!</>
+    return (
+        <>
+        <span className="mr-1 font-bold">
+            Wallet connected!
+        </span>
+        </>
+    )
 }
 
 export default InfoMessage

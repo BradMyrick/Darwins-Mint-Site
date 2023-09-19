@@ -4,7 +4,7 @@ import { fromHex, isHex } from 'viem'
 import clsx from 'clsx'
 
 // Utilities
-import { getIdFromHash, ipfsToHttps } from '@/utils'
+import { getIdFromHash } from '@/utils'
 
 // Types
 import { INFT, INFTDataWithId } from '@/types/getNftsAPI'
@@ -109,12 +109,10 @@ const NftCard = ({ data }: IProps) => {
                                 {currentData ? (
                                     <Image
                                         className="absolute inset-0 m-auto"
-                                        width="90"
-                                        height="50"
-                                        src={ipfsToHttps(
-                                            currentData?.metadata?.image || ''
-                                        )}
-                                        alt="caveman silhouette"
+                                        layout="fill"
+                                        src={currentData?.metadata?.image || ''
+                                        }
+                                        alt="caveman prereveal"
                                     />
                                 ) : null}
                             </figure>

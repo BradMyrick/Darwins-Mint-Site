@@ -20,16 +20,6 @@ const shortenHexString = (hexString: string | undefined) => {
 }
 
 /**
- * Converts an IPFS URL to its corresponding HTTPS URL.
- *
- * @param {string} ipfsString - The input IPFS URL to be converted to HTTPS.
- * @returns {string} The converted HTTPS URL.
- */
-const ipfsToHttps = (ipfsString: string): string => {
-    return ipfsString.replace('ipfs://', 'https://ipfs.io/ipfs/')
-}
-
-/**
  * Retrieves an ID from a given hash value.
  *
  * @param {string | undefined} hashId - The hash value to extract the ID from.
@@ -41,4 +31,4 @@ const getIdFromHash = (hashId: undefined | string): string | undefined => {
         : hashId
 }
 
-export { shortenHexString, ipfsToHttps, getIdFromHash }
+export { shortenHexString, getIdFromHash }

@@ -13,9 +13,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 // Contract
 import { contractConfig } from '@/contract/config'
 
-// Utilities
-import { ipfsToHttps } from '@/utils'
-
 // Requests
 import { getNFTMetadata } from '@/requests'
 
@@ -31,11 +28,8 @@ import AngledContentStripe from '@/components/shared/AngledContentStripe/AngledC
 import Modal from '@/components/common/Modal/Modal'
 import Button from '@/components/common/Button/Button'
 import InputNft from '@/components/sections/SectionMint/InputNft'
-import Title from '@/components/common/Title/Title'
 import Faucet from '@/components/sections/SectionMint/Faucet/Faucet'
-import LoaderDots from '@/components/common/LoaderDots/LoaderDots'
 import NFTGalleryModal from '@/components/NFTGallery/Modal'
-import StatusMessage from './StatusMessage'
 import InfoMessage from './InfoMessage'
 import WrongNetworkNotice from './WrongNetworkNotice'
 import NotConnectedNotice from './NotConnectedNotice'
@@ -253,7 +247,7 @@ const SectionMint = () => {
                 <Faucet />
             ) : null}
             {isWrongNetwork ? <WrongNetworkNotice /> : null}
-            
+
             {/* Minting */}
 
             <div
@@ -293,7 +287,7 @@ const SectionMint = () => {
                             transactionError={transactionError}
                             mintedMetadata={mintedMetadata}
                             mintedQuantity={claimedNFTModalData?.metadata?.quantity}
-                            isEnoughBalanceToMint={isEnoughBalanceToMint}/>
+                            isEnoughBalanceToMint={isEnoughBalanceToMint} />
                     </InfoMessageWrapper>
                 ) : null}
                 <div
@@ -316,18 +310,18 @@ const SectionMint = () => {
                                 isReceiptLoading ||
                                 !isEnoughBalanceToMint
                             }
-                            />
-                            <p className="mb-9 text-sm">
-                                {isWrongNetwork
-                                    ? 'Please switch to the correct network to mint NFTs.'
-                                    : lowUserBalance
+                        />
+                        <p className="mb-9 text-sm">
+                            {isWrongNetwork
+                                ? 'Please switch to the correct network to mint NFTs.'
+                                : lowUserBalance
                                     ? 'You need to have at least 0.0069 ETH to mint NFTs.'
                                     : !isEnoughBalanceToMint
-                                    ? 'Not enough balance to mint NFTs.'
-                                    : isPublicMintLive
-                                    ? 'Minting is live. Mint away!'
-                                    : 'Minting is not live yet. Stay tuned!'}
-                            </p>
+                                        ? 'Not enough balance to mint NFTs.'
+                                        : isPublicMintLive
+                                            ? 'Minting is live. Mint away!'
+                                            : 'Minting is not live yet. Stay tuned!'}
+                        </p>
                         <Button
                             type="button"
                             variation="primary"
@@ -368,9 +362,9 @@ const SectionMint = () => {
                                 className="relative z-[1] h-full w-full"
                                 width="100"
                                 height="50"
-                                src={ '/DARWINS.png' }
+                                src={'/DARWINS.png'}
                                 alt={
-                                        'placeholder NFT caveman'
+                                    'placeholder NFT caveman'
                                 }
                             />
                         </button>
@@ -380,7 +374,7 @@ const SectionMint = () => {
             <AngledContentStripe color="blue">
                 <div className="mx-auto flex max-w-[820px] flex-col px-5 py-4 xs:flex-row">
                     <p className="text-md max-w-auto basis shrink grow pt-2">
-                        NFTs within &apos;The Darwins&apos; collection represent a fusion of history and innovation. Each NFT embraces its own distinctive evolution mechanics, making them more than just digital collectibles. These NFTs are a testament to the blockchain&apos;s immutability and the evolution that unfolds within.
+                        NFTs within &apos;The Darwins&apos; are a fusion of history and innovation. Each NFT possesses unique evolutionary mechanics, transcending mere digital collectibles. They embody blockchain&apos;s unalterable essence and the unfolding journey within.
                         <br />
                         <br />
                         <span className="text-lg">

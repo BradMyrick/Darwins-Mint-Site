@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { shortenHexString, ipfsToHttps, getIdFromHash } from './parsing'
+import { shortenHexString, getIdFromHash } from './parsing'
 
 // shortenHexString
 test('shorten a hexadecimal string', () => {
@@ -10,15 +10,6 @@ test('shorten a hexadecimal string', () => {
 
 test('return undefined if the input string is falsy', () => {
     expect(shortenHexString('')).toBe(undefined)
-})
-
-// ipfsToHttps
-test('convert an IPFS URL to its corresponding HTTPS URL', () => {
-    expect(
-        ipfsToHttps('ipfs://QmX5jf1zZf5EGFb8Vw6NS26Wzge6z1m1HcGP9c9bRvz5qR')
-    ).toBe(
-        'https://ipfs.io/ipfs/QmX5jf1zZf5EGFb8Vw6NS26Wzge6z1m1HcGP9c9bRvz5qR'
-    )
 })
 
 // getIdFromHash

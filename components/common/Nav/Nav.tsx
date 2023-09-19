@@ -11,7 +11,6 @@ import NFTGalleryModal from '@/components/NFTGallery/Modal'
 import ButtonAccount from '@/components/shared/ButtonAccount/ButtonAccount'
 import ButtonConnect from '@/components/shared/ButtonConnect/ButtonConnect'
 
-const includeStyles = 'bg-[url("/darwin-pattern-alternative.png")]'
 
 const Nav = () => {
     const navRef = useRef<HTMLElement>(null)
@@ -28,7 +27,7 @@ const Nav = () => {
     const navClasses = clsx(
         'flex w-full z-[2] fixed transition duration-450 bg-transparent',
         isOverHeight &&
-            'bg-dodgerBlue bg-[url("/darwin-pattern-alternative.png")] bg-[size:20%] bg-repeat'
+            'bg-dodgerBlue bg-[size:20%] bg-repeat'
     )
     const h1Classes = clsx(
         'absolute rotate-[-3.7deg] text-antiFlashWhite transition duration-1000 sm:whitespace-nowrap',
