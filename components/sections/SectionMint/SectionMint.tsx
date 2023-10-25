@@ -74,7 +74,7 @@ const SectionMint = () => {
 
     const lowUserBalance =
         typeof userBalance?.formatted === 'string' &&
-        +userBalance.formatted < 0.0069
+        +userBalance.formatted < 0.0015
 
     const totalPrice = quantity ? pricePerNFT * +quantity : undefined
     const isEnoughBalanceToMint =
@@ -315,7 +315,7 @@ const SectionMint = () => {
                             {isWrongNetwork
                                 ? 'Please switch to the correct network to mint NFTs.'
                                 : lowUserBalance
-                                    ? 'You need to have at least 0.0069 ETH to mint NFTs.'
+                                    ? 'You need to have at least 0.0015 ETH to mint NFTs.'
                                     : !isEnoughBalanceToMint
                                         ? 'Not enough balance to mint NFTs.'
                                         : isPublicMintLive

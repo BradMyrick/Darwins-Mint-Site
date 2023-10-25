@@ -39,9 +39,6 @@ const SectionHero = () => {
                                     Rad - Discord Manager (Vibes, Host, Community engagement, Bot integration)
                                 </li>
                                 <br />
-                                <li>
-                                    Wes - Project Manager/Business Development (Roadmapping, Document management, Branding/IP, Creative Marketing, Strategic Partnerships)
-                                </li>
                             </ul>
                         </p>
                     </Title>

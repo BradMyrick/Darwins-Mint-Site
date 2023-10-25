@@ -33,7 +33,7 @@ const Faucet = () => {
                 </span>
                 <br />
                 Your current balance is {userBalance?.formatted}{' '}
-                {nativeCurrency}. You must have at least 0.0069 {nativeCurrency}{' '}, plus a small amount for gas fees, to mint a Darwin.
+                {nativeCurrency}. You must have at least 0.0015 {nativeCurrency}{' '}, plus a small amount for gas fees, to mint a Darwin.
             </span>
             <span className="mb-5 block border-b border-dashed border-wenge/40"></span>
             <span className="mb-4 block">
