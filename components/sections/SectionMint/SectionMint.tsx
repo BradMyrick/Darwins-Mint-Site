@@ -362,7 +362,7 @@ const SectionMint = () => {
                                 className="relative z-[1] h-full w-full"
                                 width="100"
                                 height="50"
-                                src={'/DARWINS.png'}
+                                src={'/Pre-Reveal.gif'}
                                 alt={
                                     'placeholder NFT caveman'
                                 }

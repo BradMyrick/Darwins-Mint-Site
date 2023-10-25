@@ -22,25 +22,19 @@ export const roadmapPhasesConfig = [
     {
         name: 'Phase 4: Adaptation Q3 2024',
         description: 'Gameplay Refinement: Fine-tuning of gameplay mechanics based on community feedback. Introduction of new eras or time periods for Darwin evolution. Strategic burns becoming a central gameplay strategy',
-        src: '/DARWINS.png',
+        src: '/phase4.jpg',
         alt: 'evolution illustration',
     },
     {
         name: 'Phase 5: Dominance Q4 2024',
         description: 'Triumph: Embracing competition. Hosting organized tournaments and thrilling events. Honoring top-performing players with recognition and rewards. Crafting a competitive ranking system.',
-        src: '/DARWINS.png',
+        src: '/phase5.jpg',
         alt: 'evolution illustration',
     },
     {
         name: 'Phase 6: Legacy 2025 and Beyond',
         description: 'Ongoing Evolution: Continuous development of new content and features Expansion into new platforms and technologies The emergence of legendary Darwins with unique stories',
-        src: '/DARWINS.png',
-        alt: 'evolution illustration',
-    },
-    {
-        name: 'Phase 7: Preservation Future',
-        description: 'Ensuring Longevity Sustainability initiatives to maintain a healthy ecosystem Preservation of the core gameplay and mechanics that make "The Darwins" unique Engagement with the community to steer the project\'s future',
-        src: '/DARWINS.png',
+        src: '/phase6.jpg',
         alt: 'evolution illustration',
     },
 ]
